@@ -24,7 +24,7 @@ const DataProcessor = (function() {
      */
     function loadData(callback) {
         try {
-            fetch('temperature_daily.csv')
+            fetch('http://cdn.jsdelivr.net/gh/PenGuln/Data-Visualization-HW2/temperature_daily.csv')
                 .then(response => {
                     return response.text();
                 })
@@ -32,7 +32,7 @@ const DataProcessor = (function() {
                     parseCSV(text, callback);
                 });
         } catch (err) {
-            console.log("Error reading file, using sample data");
+            console.log("Error reading file");
         }
     }
 

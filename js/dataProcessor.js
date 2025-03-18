@@ -24,7 +24,7 @@ const DataProcessor = (function() {
      */
     function loadData(callback) {
         try {
-            fetch('http://cdn.jsdelivr.net/gh/PenGuln/Data-Visualization-HW2/temperature_daily.csv')
+            fetch('https://cdn.jsdelivr.net/gh/PenGuln/Data-Visualization-HW2/temperature_daily.csv')
                 .then(response => {
                     return response.text();
                 })

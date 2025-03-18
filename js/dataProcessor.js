@@ -80,8 +80,8 @@ const DataProcessor = (function() {
                     minTemps: []
                 };
                 monthlyAverages[year][month] = {
-                    avgMax: null,
-                    avgMin: null
+                    mxMax: null,
+                    mnMin: null
                 };
             }
         }
@@ -119,13 +119,13 @@ const DataProcessor = (function() {
                     minTemp: minTemp
                 };
                 
-                // Add to arrays for calculating monthly averages
+                // Add to arrays for calculating monthly summary
                 organizedData[year][month].maxTemps.push(maxTemp);
                 organizedData[year][month].minTemps.push(minTemp);
             }
         });
 
-        // Calculate monthly averages and prepare data for visualization
+        // Calculate monthly summary and prepare data for visualization
         const yearMonthData = [];
         
         for (let year = START_YEAR; year <= END_YEAR; year++) {
@@ -133,13 +133,13 @@ const DataProcessor = (function() {
                 const monthData = organizedData[year][month];
                 
                 // Calculate monthly summary
-                const avgMax = monthData.maxTemps.length > 0 ? Math.max(...monthData.maxTemps) : null;
-                const avgMin = monthData.minTemps.length > 0 ? Math.min(...monthData.minTemps) : null;
+                const mxMax = monthData.maxTemps.length > 0 ? Math.max(...monthData.maxTemps) : null;
+                const mnMin = monthData.minTemps.length > 0 ? Math.min(...monthData.minTemps) : null;
                 
                 // Keep one decimal place
                 monthlyAverages[year][month] = {
-                    avgMax: avgMax !== null ? Math.round(avgMax * 10) / 10 : null,
-                    avgMin: avgMin !== null ? Math.round(avgMin * 10) / 10 : null
+                    mxMax: mxMax !== null ? Math.round(mxMax * 10) / 10 : null,
+                    mnMin: mnMin !== null ? Math.round(mnMin * 10) / 10 : null
                 };
                 
                 // Prepare daily data
@@ -169,8 +169,8 @@ const DataProcessor = (function() {
                     year: year,
                     month: month,
                     monthName: MONTHS[month],
-                    avgMax: monthlyAverages[year][month].avgMax,
-                    avgMin: monthlyAverages[year][month].avgMin,
+                    mxMax: monthlyAverages[year][month].mxMax,
+                    mnMin: monthlyAverages[year][month].mnMin,
                     dailyTemps: dailyTemps
                 });
             }

@@ -95,13 +95,13 @@ const Heatmap = (function() {
                 return `translate(${x(d.year)},${y(d.month)})`;
             });
         
-        // Add background rectangles (colored by avg temp)
+        // Add background rectangles (colored by temp)
         cells.append("rect")
             .attr("class", "heatmap-cell")
             .attr("width", x.bandwidth())
             .attr("height", y.bandwidth())
             .style("fill", d => {
-                const value = currentView === 'min' ? d.avgMin : d.avgMax;
+                const value = currentView === 'min' ? d.mnMin : d.mxMax;
                 return value !== null ? colorScale(value) : "#f0f0f0";
             })
             .on("mouseover", function(event, d) {
@@ -146,8 +146,8 @@ const Heatmap = (function() {
             
         tooltip.html(`
             <div class="tooltip-title">${d.monthName} ${d.year}</div>
-            <div>Max: ${d.avgMax !== null ? d.avgMax.toFixed(1) + "°C" : "N/A"}</div>
-            <div>Min: ${d.avgMin !== null ? d.avgMin.toFixed(1) + "°C" : "N/A"}</div>
+            <div>Max: ${d.mxMax !== null ? d.mxMax.toFixed(1) + "°C" : "N/A"}</div>
+            <div>Min: ${d.mnMin !== null ? d.mnMin.toFixed(1) + "°C" : "N/A"}</div>
         `)
             .style("left", (event.pageX + 10) + "px")
             .style("top", (event.pageY - 28) + "px");
